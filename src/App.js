@@ -55,7 +55,17 @@ function App() {
   };
 
   const onRemove = (id) => {
+    console.log(id);
     setUsers(users.filter((user) => user.id !== id));
+  };
+
+  const onToggle = (id) => {
+    console.log(id);
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
   };
 
   return (
@@ -66,7 +76,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} />;
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />;
     </>
   );
 }
