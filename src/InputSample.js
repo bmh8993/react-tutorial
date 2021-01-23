@@ -26,7 +26,7 @@ function InputSample() {
   };
   return (
     <div>
-      <input name="name" placeholder="이름" onChonge={onChange} value={name} />
+      <input name="name" placeholder="이름" onChange={onChange} value={name} />
       <input
         name="nickname"
         placeholder="닉네임"
@@ -36,7 +36,7 @@ function InputSample() {
       <button onClick={onReset}>초기화</button>
       <div>
         <b>값: </b>
-        {name}: {{ nickname }}
+        {name}: ({nickname})
       </div>
     </div>
   );
