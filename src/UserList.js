@@ -49,7 +49,6 @@ const User = React.memo(function User({ user, onRemove, onToggle }) {
 });
 
 function UserList({ users, onRemove, onToggle }) {
-  console.log("rerender");
   return (
     <div>
       {users.map((user) => (
