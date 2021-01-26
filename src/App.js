@@ -54,32 +54,26 @@ function App() {
       username,
       email,
     };
-    setUsers(users.concat(user));
+    setUsers((users) => users.concat(user)); // 이렇게 수정하면 setUsers의 callBack 함수의 파라미터로 최신 users를 조회하게 되므로 deps에서 제외시킬 수 있다.
     // setUsers([...users, user]); 위와 동일
     setInputs({
       username: "",
       email: "",
     });
     nextId.current += 1;
-  }, [email, username, users]);
+  }, [email, username]);
 
-  const onRemove = useCallback(
-    (id) => {
-      setUsers(users.filter((user) => user.id !== id));
-    },
-    [users]
-  );
+  const onRemove = useCallback((id) => {
+    setUsers((users) => users.filter((user) => user.id !== id));
+  }, []);
 
-  const onToggle = useCallback(
-    (id) => {
-      setUsers(
-        users.map((user) =>
-          user.id === id ? { ...user, active: !user.active } : user
-        )
-      );
-    },
-    [users]
-  );
+  const onToggle = useCallback((id) => {
+    setUsers((users) =>
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  }, []);
   const count = useMemo(() => countActiveUsers(users), [users]);
   // users가 바뀔 때에만 호출이 되고, 그런게 아니면 이전 값을 그대로 사용한다.
   // 컴포넌트성능 최적화
@@ -91,7 +85,7 @@ function App() {
         onChange={onChange}
         onCreate={onCreate}
       />
-      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />;
+      <UserList users={users} onRemove={onRemove} onToggle={onToggle} />
       <div>활성 사용자 수: {count}</div>
     </>
   );

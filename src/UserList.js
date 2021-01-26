@@ -1,4 +1,6 @@
-function User({ user, onRemove, onToggle }) {
+import React from "react";
+
+const User = React.memo(function User({ user, onRemove, onToggle }) {
   const { id, username, email, active } = user;
   //useEffect(() => {
   //  console.log("컴포넌트가 화면에 나타남");
@@ -44,9 +46,10 @@ function User({ user, onRemove, onToggle }) {
       <button onClick={() => onRemove(id)}>삭제</button>
     </div>
   );
-}
+});
 
 function UserList({ users, onRemove, onToggle }) {
+  console.log("rerender");
   return (
     <div>
       {users.map((user) => (
@@ -61,6 +64,6 @@ function UserList({ users, onRemove, onToggle }) {
   );
 }
 
-export default UserList;
+export default React.memo(UserList);
 /*onClick={onRemove(id)}>삭제 이렇게 하면 렌더링 되는 시점에 onRemove가
   동작한다.*/
